@@ -3,14 +3,20 @@ using UnityEngine.UI;
 
 public class SimpleHealth : MonoBehaviour
 {
-    public Image healthFill; // Verwijs naar je rode Image
-    public float maxHealth = 100;
-    float currentHealth;
+    [Header("Health Settings")]
+    public float maxHealth = 100f;
+    public Image healthFill; // Sleep je healthbar fill image hiernaartoe
+    
+    [Header("Debug")]
+    public bool enableDebug = true;
+    
+    private float currentHealth;
 
     void Start()
     {
         currentHealth = maxHealth;
-        UpdateHealthBar(); // Zorg dat de healthbar meteen goed staat
+        UpdateHealthBar();
+        if(enableDebug) Debug.Log("[Health] Systeem gestart. Health: " + currentHealth);
     }
 
     public void TakeDamage(float damage)
@@ -24,23 +30,24 @@ public class SimpleHealth : MonoBehaviour
     void UpdateHealthBar()
     {
         healthFill.fillAmount = currentHealth / maxHealth;
-        Debug.Log($"Healthbar update: {healthFill.fillAmount * 100}%");
+        if(enableDebug) Debug.Log($"[Health] Update: {healthFill.fillAmount:P0}");
     }
 
     void Die()
     {
-        Debug.LogWarning("Speler is dood!");
-        // Voeg hier dood-logica toe, bijvoorbeeld:
-        // Time.timeScale = 0; // Pause het spel
-        // SceneManager.LoadScene("GameOver");
+        Debug.LogWarning("[Health] Speler is dood!");
+        // Voorbeeld dood-logica:
+        // GetComponent<PlayerMovement>().enabled = false;
+        // Time.timeScale = 0f;
     }
 
     void Update()
     {
+        // Testfunctionaliteit - kun je later verwijderen
         if (Input.GetKeyDown(KeyCode.Space))
         {
             TakeDamage(10);
-            Debug.Log($"Schade ontvangen. Huidige health: {currentHealth}");
+            if(enableDebug) Debug.Log($"[TEST] Schade ontvangen. Health: {currentHealth}");
         }
     }
 }
