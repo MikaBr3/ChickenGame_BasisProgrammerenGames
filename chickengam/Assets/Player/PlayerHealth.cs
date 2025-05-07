@@ -36,7 +36,7 @@ public class SimpleHealth : MonoBehaviour
 
     void Die()
     {
-        SceneManager.LoadScene("StartScreen");
+        SceneManager.LoadScene("Death_Screen");
         Debug.LogWarning("[Health] Speler is dood!");
         // Voorbeeld dood-logica:
         // GetComponent<PlayerMovement>().enabled = false;
@@ -45,7 +45,6 @@ public class SimpleHealth : MonoBehaviour
 
     void Update()
     {
-        // Testfunctionaliteit - kun je later verwijderen
         if (Input.GetKeyDown(KeyCode.Space))
         {
             TakeDamage(10);

@@ -5,7 +5,7 @@ public class StartScreenManager : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene("GameScene"); // Replace with your game scene name
+        SceneManager.LoadScene("Game_Screen"); // Replace with your game scene name
     }
 
     public void OpenSettings()
