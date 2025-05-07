@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -5974173556426588230}
   - component: {fileID: -6968234933707885505}
   m_Layer: 0
-  m_Name: Another_Enemy
+  m_Name: Enemy_Normaal
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.9980221, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -176,10 +176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a758460404718ef42909e16e2cbbf0c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
-  damage: 10
-  attackRange: 1.5
-  attackCooldown: 1
+  moveSpeed: 3
+  rotationSpeed: 5
 --- !u!114 &-6968234933707885505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,4 +191,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
-  cashWorth: 10

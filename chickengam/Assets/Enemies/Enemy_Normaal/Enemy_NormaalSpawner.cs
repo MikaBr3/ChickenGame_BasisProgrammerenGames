@@ -1,9 +1,8 @@
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class Enemy_NormaalSpawner : MonoBehaviour
 {
     public GameObject enemyPrefab;      // Sleep je Enemy-prefab hiernaartoe
-    public GameObject enemyPrefab2;      // Sleep je Enemy-prefab hiernaartoe
     public float spawnInterval = 3f;   // Tijd tussen spawns
     public float minSpawnDistance = 3f; // Minimale afstand tot de speler
     public float maxSpawnDistance = 7f; // Maximale afstand tot de speler
@@ -38,7 +37,6 @@ public class EnemySpawner : MonoBehaviour
             if (hit == null) // Geen obstakels gevonden
             {
                 Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-                Instantiate(enemyPrefab2, spawnPosition, Quaternion.identity);
                 positionFound = true;
             }
 

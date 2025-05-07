@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour
+public class Enemy_SpeedAI : MonoBehaviour
 {
     [Header("Movement")]
-    public float moveSpeed = 3f;
+    public float moveSpeed = 6f;
     
     [Header("Combat")]
     public float damage = 10f; // Pas dit aan per enemy type
     public float attackRange = 1.5f;
-    public float attackCooldown = 1f;
+    public float attackCooldown = 0.5f;
     
     private Transform player;
     private float lastAttackTime;

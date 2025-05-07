@@ -35,7 +35,46 @@ public class Bullet : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            EnemyHealth enemy = collision.GetComponent<EnemyHealth>();
+            Enemy_NormaalHealth enemy = collision.GetComponent<Enemy_NormaalHealth>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damage);
+            }
+            Destroy(gameObject);
+        }
+        else if (!collision.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+        }
+         if (collision.CompareTag("Enemy"))
+        {
+            Enemy_SpeedHealth enemy = collision.GetComponent<Enemy_SpeedHealth>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damage);
+            }
+            Destroy(gameObject);
+        }
+        else if (!collision.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+        }
+         if (collision.CompareTag("Enemy"))
+        {
+            Enemy_StrongHealth enemy = collision.GetComponent<Enemy_StrongHealth>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damage);
+            }
+            Destroy(gameObject);
+        }
+        else if (!collision.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+        }
+           if (collision.CompareTag("Enemy"))
+        {
+            Enemy_TankHealth enemy = collision.GetComponent<Enemy_TankHealth>();
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SimpleHealth : MonoBehaviour
@@ -35,6 +36,7 @@ public class SimpleHealth : MonoBehaviour
 
     void Die()
     {
+        SceneManager.LoadScene("StartScreen");
         Debug.LogWarning("[Health] Speler is dood!");
         // Voorbeeld dood-logica:
         // GetComponent<PlayerMovement>().enabled = false;

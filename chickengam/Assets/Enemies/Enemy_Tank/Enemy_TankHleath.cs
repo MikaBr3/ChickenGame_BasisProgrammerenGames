@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour
+public class Enemy_TankHealth : MonoBehaviour
 {
     [Header("Health Settings")]
-    public int maxHealth = 3;
+    public int maxHealth = 8;
     private int currentHealth;
 
     [Header("Rewards")]
-    public int cashWorth = 10; // Stel dit in per enemy type in de Inspector
+    public int cashWorth = 30; // Stel dit in per enemy type in de Inspector
 
     void Start()
     {
