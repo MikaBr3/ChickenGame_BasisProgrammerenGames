@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SimpleHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
     [Header("Health Settings")]
     public float maxHealth = 100f;
@@ -11,7 +11,7 @@ public class SimpleHealth : MonoBehaviour
     [Header("Debug")]
     public bool enableDebug = true;
     
-    private float currentHealth;
+    public float currentHealth { get; private set; }
 
     void Start()
     {
@@ -28,10 +28,20 @@ public class SimpleHealth : MonoBehaviour
         if(currentHealth <= 0) Die();
     }
 
-    void UpdateHealthBar()
+    public void UpdateHealthBar()
     {
-        healthFill.fillAmount = currentHealth / maxHealth;
-        if(enableDebug) Debug.Log($"[Health] Update: {healthFill.fillAmount:P0}");
+        if (healthFill != null)
+        {
+            healthFill.fillAmount = currentHealth / maxHealth;
+            if(enableDebug) Debug.Log($"[Health] Update: {healthFill.fillAmount:P0}");
+        }
+    }
+
+    public void IncreaseHealth(float amount)
+    {
+        currentHealth += amount;
+        maxHealth += amount;
+        UpdateHealthBar();
     }
 
     void Die()

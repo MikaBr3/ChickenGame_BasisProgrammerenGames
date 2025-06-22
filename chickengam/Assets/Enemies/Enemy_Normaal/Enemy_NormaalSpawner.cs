@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Enemy_NormaalSpawner : MonoBehaviour
 {
@@ -13,37 +14,62 @@ public class Enemy_NormaalSpawner : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        InvokeRepeating("SpawnEnemy", 0f, spawnInterval);
+        // InvokeRepeating("SpawnEnemy", 0f, spawnInterval); // We remove this so the WaveManager can control spawning.
     }
 
-    void SpawnEnemy()
+    public void StartSpawning(int enemyCount)
     {
-        if (player == null) return;
+        StartCoroutine(SpawnWave(enemyCount));
+    }
+
+    private System.Collections.IEnumerator SpawnWave(int enemyCount)
+    {
+        int spawnedCount = 0;
+        while (spawnedCount < enemyCount)
+        {
+            // Keep trying to spawn until successful
+            if (TrySpawnEnemy())
+            {
+                spawnedCount++;
+                yield return new WaitForSeconds(spawnInterval); // Wait before spawning the next one
+            }
+            else
+            {
+                // If it fails to find a spot, wait a short moment and try again
+                // without counting it as a spawned enemy.
+                yield return new WaitForSeconds(0.5f); 
+            }
+        }
+    }
+
+    // Changed to return true on success and false on failure
+    bool TrySpawnEnemy()
+    {
+        if (player == null) return false;
 
         Vector2 spawnPosition;
-        bool positionFound = false;
         int attempts = 0;
 
         // Probeer een geldige spawnplek te vinden
-        while (!positionFound && attempts < maxAttempts)
+        while (attempts < maxAttempts)
         {
             // Kies een willekeurige richting en afstand
             Vector2 randomDirection = Random.insideUnitCircle.normalized;
             float randomDistance = Random.Range(minSpawnDistance, maxSpawnDistance);
             spawnPosition = (Vector2)player.position + randomDirection * randomDistance;
 
-            // Controleer of de plek vrij is (optioneel: gebruik Physics2D.OverlapCircle)
+            // Controleer of de plek vrij is
             Collider2D hit = Physics2D.OverlapCircle(spawnPosition, 0.5f);
             if (hit == null) // Geen obstakels gevonden
             {
                 Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-                positionFound = true;
+                return true; // Success!
             }
 
             attempts++;
         }
 
-        if (!positionFound)
-            Debug.LogWarning("Geen geldige spawnplek gevonden na " + maxAttempts + " pogingen.");
+        Debug.LogWarning("Geen geldige spawnplek gevonden na " + maxAttempts + " pogingen. Trying again...");
+        return false; // Failure
     }
 }

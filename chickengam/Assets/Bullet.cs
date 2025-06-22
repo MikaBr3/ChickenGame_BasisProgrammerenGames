@@ -12,6 +12,12 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         spawnTime = Time.time; // Onthoud wanneer de bullet is gespawned
+        
+        // Apply damage upgrade if available
+        if (Upgrades.Instance != null)
+        {
+            damage += (int)Upgrades.Instance.GetUpgradeValue(Upgrades.Instance.damageUpgrade);
+        }
     }
 
     void Update()
@@ -35,51 +41,38 @@ public class Bullet : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            Enemy_NormaalHealth enemy = collision.GetComponent<Enemy_NormaalHealth>();
-            if (enemy != null)
+            // Try to damage all enemy types
+            Enemy_NormaalHealth enemyNormaal = collision.GetComponent<Enemy_NormaalHealth>();
+            if (enemyNormaal != null)
             {
-                enemy.TakeDamage(damage);
+                enemyNormaal.TakeDamage(damage);
+                Destroy(gameObject);
+                return;
             }
-            Destroy(gameObject);
-        }
-        else if (!collision.CompareTag("Player"))
-        {
-            Destroy(gameObject);
-        }
-         if (collision.CompareTag("Enemy"))
-        {
-            Enemy_SpeedHealth enemy = collision.GetComponent<Enemy_SpeedHealth>();
-            if (enemy != null)
+            
+            Enemy_SpeedHealth enemySpeed = collision.GetComponent<Enemy_SpeedHealth>();
+            if (enemySpeed != null)
             {
-                enemy.TakeDamage(damage);
+                enemySpeed.TakeDamage(damage);
+                Destroy(gameObject);
+                return;
             }
-            Destroy(gameObject);
-        }
-        else if (!collision.CompareTag("Player"))
-        {
-            Destroy(gameObject);
-        }
-         if (collision.CompareTag("Enemy"))
-        {
-            Enemy_StrongHealth enemy = collision.GetComponent<Enemy_StrongHealth>();
-            if (enemy != null)
+            
+            Enemy_StrongHealth enemyStrong = collision.GetComponent<Enemy_StrongHealth>();
+            if (enemyStrong != null)
             {
-                enemy.TakeDamage(damage);
+                enemyStrong.TakeDamage(damage);
+                Destroy(gameObject);
+                return;
             }
-            Destroy(gameObject);
-        }
-        else if (!collision.CompareTag("Player"))
-        {
-            Destroy(gameObject);
-        }
-           if (collision.CompareTag("Enemy"))
-        {
-            Enemy_TankHealth enemy = collision.GetComponent<Enemy_TankHealth>();
-            if (enemy != null)
+            
+            Enemy_TankHealth enemyTank = collision.GetComponent<Enemy_TankHealth>();
+            if (enemyTank != null)
             {
-                enemy.TakeDamage(damage);
+                enemyTank.TakeDamage(damage);
+                Destroy(gameObject);
+                return;
             }
-            Destroy(gameObject);
         }
         else if (!collision.CompareTag("Player"))
         {

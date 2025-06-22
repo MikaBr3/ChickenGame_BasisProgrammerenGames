@@ -12,12 +12,12 @@ public class Enemy_TankAI : MonoBehaviour
     
     private Transform player;
     private float lastAttackTime;
-    private SimpleHealth playerHealth;
+    private PlayerHealth PlayerHealth;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        playerHealth = player.GetComponent<SimpleHealth>();
+        PlayerHealth = player.GetComponent<PlayerHealth>();
     }
 
     void Update()
@@ -42,9 +42,9 @@ public class Enemy_TankAI : MonoBehaviour
 
     void AttackPlayer()
     {
-        if(playerHealth != null)
+        if(PlayerHealth != null)
         {
-            playerHealth.TakeDamage(damage);
+            PlayerHealth.TakeDamage(damage);
             Debug.Log($"Enemy attacked! Damage: {damage}");
         }
     }

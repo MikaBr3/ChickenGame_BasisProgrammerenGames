@@ -12,12 +12,12 @@ public class Enemy_NormaalAI : MonoBehaviour
     
     private Transform player;
     private float lastAttackTime;
-    private SimpleHealth playerHealth;
+    private PlayerHealth playerHealth;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        playerHealth = player.GetComponent<SimpleHealth>();
+        playerHealth = player.GetComponent<PlayerHealth>();
     }
 
     void Update()

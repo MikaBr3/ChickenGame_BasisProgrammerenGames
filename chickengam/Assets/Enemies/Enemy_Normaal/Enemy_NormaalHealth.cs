@@ -5,6 +5,7 @@ public class Enemy_NormaalHealth : MonoBehaviour
     [Header("Health Settings")]
     public int maxHealth = 3;
     private int currentHealth;
+    private bool isDead = false;
 
     [Header("Rewards")]
     public int cashWorth = 10; // Stel dit in per enemy type in de Inspector
@@ -16,6 +17,8 @@ public class Enemy_NormaalHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (isDead) return;
+
         Debug.Log($"TakeDamage: {damage} schade");
         currentHealth -= damage;
         
@@ -27,6 +30,10 @@ public class Enemy_NormaalHealth : MonoBehaviour
 
     void Die()
     {
+        if (isDead) return;
+        isDead = true;
+
+        Debug.Log("Normal Enemy Died");
         // Geef geld aan de speler
         if (MoneyManager.Instance != null)
         {
@@ -36,6 +43,12 @@ public class Enemy_NormaalHealth : MonoBehaviour
         else
         {
             Debug.LogWarning("MoneyManager niet gevonden!");
+        }
+
+        // Notify the WaveManager that an enemy has been killed
+        if (WaveManager.Instance != null)
+        {
+            WaveManager.Instance.OnEnemyKilled();
         }
 
         Destroy(gameObject);

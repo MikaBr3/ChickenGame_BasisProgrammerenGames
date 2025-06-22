@@ -173,11 +173,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6124348881847734279}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94eaee965ce3c6547b99644a708ebad5, type: 3}
+  m_Script: {fileID: 11500000, guid: e5a4f79ebeeb7824f925a890fb572746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 6
-  cashWorth: 25
+  maxHealth: 20
+  cashWorth: 30
 --- !u!114 &5576565585451589500
 MonoBehaviour:
   m_ObjectHideFlags: 0

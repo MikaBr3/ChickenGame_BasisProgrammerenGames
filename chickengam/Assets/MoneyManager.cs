@@ -28,8 +28,30 @@ public class MoneyManager : MonoBehaviour
         Debug.Log($"${amount} toegevoegd. Totaal: ${currentMoney}");
     }
 
+    public void SpendMoney(int amount)
+    {
+        if (currentMoney >= amount)
+        {
+            currentMoney -= amount;
+            UpdateUI();
+            Debug.Log($"${amount} uitgegeven. Totaal: ${currentMoney}");
+        }
+        else
+        {
+            Debug.Log("Niet genoeg geld!");
+        }
+    }
+
+    public int GetCurrentMoney()
+    {
+        return currentMoney;
+    }
+
     void UpdateUI()
     {
-        moneyText.text = $"${currentMoney}";
+        if (moneyText != null)
+        {
+            moneyText.text = $"${currentMoney}";
+        }
     }
 }
